@@ -1,27 +1,27 @@
 import java.util.Scanner;
 
 public class PlaylistSesi6 {
-    private static final int MAX_SIZE = 100;
-    private String[] songs;
-    private int top;
+    private static final int MAX_SIZE = 200; //ukuran untuk max musik
+    private String[] songs; //untuk string variabel songs
+    private int top; // untuk integer variabel top
 
-    public Playlist() {
+//public untuk Playlist dengan class yang mesti sama pada baris ke 3
+    public PlaylistSesi6() {
         songs = new String[MAX_SIZE];
         top = -1;
     }
-
-    public void push(String song) {
+//untuk fungsi tambah antrian
+    public void tambahAntrian(String song) {
         if (top < MAX_SIZE - 1) {
             top++;
             songs[top] = song;
             System.out.println(song + " telah ditambahkan ke dalam playlist.");
-            System.out.println("\n");
         } else {
             System.out.println("Playlist sudah penuh!");
         }
     }
-
-    public void pop() {
+//untuk fungsi hapus antrian
+    public void hapusAntrian() {
         if (top >= 0) {
             String song = songs[top];
             top--;
@@ -30,8 +30,8 @@ public class PlaylistSesi6 {
             System.out.println("Playlist sudah kosong!");
         }
     }
-
-    public void insert(String song, int index) {
+//untuk masukkan antrian
+    public void insertTambah(String song, int index) {
         if (top < MAX_SIZE - 1) {
             if (index >= 0 && index <= top + 1) {
                 for (int i = top; i >= index; i--) {
@@ -40,7 +40,6 @@ public class PlaylistSesi6 {
                 songs[index] = song;
                 top++;
                 System.out.println(song + " telah ditambahkan ke dalam playlist pada posisi " + index + ".");
-                System.out.println("\n");
             } else {
                 System.out.println("Indeks tidak valid!");
             }
@@ -48,8 +47,8 @@ public class PlaylistSesi6 {
             System.out.println("Playlist sudah penuh!");
         }
     }
-
-    public void remove(int index) {
+//untuk fungsi menghapus
+    public void removeHapus(int index) {
         if (top >= 0) {
             if (index >= 0 && index <= top) {
                 String song = songs[index];
@@ -65,13 +64,13 @@ public class PlaylistSesi6 {
             System.out.println("Playlist sudah kosong!");
         }
     }
-
-    public void removeAll() {
+//untuk fungsi menghapus pada playlist
+    public void hapusSemua() {
         top = -1;
         System.out.println("Playlist sudah dihapus semua!");
     }
-
-    public void display() {
+//untuk fungsi menampilkan playlist
+    public void menampilkanAntrian() {
         if (top >= 0) {
             System.out.println("Playlist lagu:");
             for (int i = top; i >= 0; i--) {
@@ -81,14 +80,13 @@ public class PlaylistSesi6 {
             System.out.println("Playlist kosong!");
         }
     }
-
+//script dibawah untuk membuat menu serta perulangannya menggunakan do while
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Playlist playlist = new Playlist();
+        PlaylistSesi6 urutanLagu = new PlaylistSesi6();
 
         int choice = 0;
         do {
-            System.out.println("\n");
             System.out.println("\nMenu Playlist:");
             System.out.println("1. Tampilkan Data Playlist");
             System.out.println("2. Tambah Data Playlist");
@@ -103,16 +101,15 @@ public class PlaylistSesi6 {
 
             switch (choice) {
                 case 1:
-                    playlist.display();
+                    urutanLagu.menampilkanAntrian();
                     break;
                 case 2:
                     System.out.print("Masukkan judul lagu: ");
                     String song = scanner.nextLine();
-                    playlist.push(song);
+                    urutanLagu.tambahAntrian(song);
                     break;
                 case 3:
-                    System.out.println("\n");
-                    playlist.pop();
+                    urutanLagu.hapusAntrian();
                     break;
                 case 4:
                     System.out.print("Masukkan judul lagu: ");
@@ -120,16 +117,16 @@ public class PlaylistSesi6 {
                     System.out.print("Masukkan posisi untuk menambahkan lagu: ");
                     int index = scanner.nextInt();
                     scanner.nextLine();
-                    playlist.insert(newSong, index);
+                    urutanLagu.insertTambah(newSong, index);
                     break;
                 case 5:
                     System.out.print("Masukkan posisi untuk menghapus lagu: ");
                     int removeIndex = scanner.nextInt();
                     scanner.nextLine();
-                    playlist.remove(removeIndex);
+                    urutanLagu.removeHapus(removeIndex);
                     break;
                 case 6:
-                    playlist.removeAll();
+                    urutanLagu.hapusSemua();
                     break;
                 case 0:
                     System.out.println("Terima kasih telah menggunakan program ini!");
